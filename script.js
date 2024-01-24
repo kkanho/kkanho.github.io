@@ -17,7 +17,7 @@ const displayProfile = (profile) => {
     const userInfo = document.querySelector('.user-info');
     userInfo.innerHTML = `
         <figure>
-            <img alt="user avatar" src=${profile.avatar_url} />
+            <img alt="Kan's avatar" src=${profile.avatar_url} />
         </figure>
         <div>
             <h2><a href=${profile.blog}><strong>${profile.name}</strong></a></h2>
@@ -34,7 +34,7 @@ const displayProfile = (profile) => {
     `;
 };
 
-// get list of user's public repos
+// get list of public repos
 const getRepos = async () => {
     let repos = [];
     let res;
@@ -49,7 +49,7 @@ const getRepos = async () => {
 };
 getRepos();
 
-// display list of all user's public repos
+// display list of all public repos
 const displayRepos = (repos) => {
     const userHome = "https://github.com/kkanho";
     filterInput.classList.remove('hide');
@@ -62,11 +62,18 @@ const displayRepos = (repos) => {
         const starsUrl = `${userHome}/${repo.name}/stargazers`;
         const forksUrl = `${userHome}/${repo.name}/network/members`;
 
-        let listItem = document.createElement('li');
-        listItem.classList.add('repo');
+        const cardTitle = "cardTitle"
+        const cardDescription = "cardDescription"
+        const cardGroup = "cardGroup"
+        const cardBtns = "cardBtns"
+
+        let listItem = document.createElement('div');
+        listItem.classList.add('card');
         listItem.innerHTML = `
-            <h3>${repo.name}</h3>
-            <span>${repo.description}</span> <br/><br/>`;
+            <div class=${cardTitle}>${repo.name}</div>
+            <div class=${cardDescription}>${repo.description == null ? '-' : repo.description }</div>`;
+
+        if (repo.stargazers_count > 0 || repo.language || repo.forks_count > 0) {`<div class=${cardGroup}>`}
 
         if (repo.stargazers_count > 0) {
             listItem.innerHTML += `<a href="${starsUrl}">
@@ -83,13 +90,18 @@ const displayRepos = (repos) => {
             <span>${devicons['Git']} ${repo.forks_count}</span></a>`;
         }
 
+        if (repo.stargazers_count > 0 || repo.language || repo.forks_count > 0) {`</div>`}
+
+
         if (repo.homepage && repo.homepage !== '') {
-            listItem.innerHTML += `<br /> <br />
-            <a class="link-btn" href=${repo.html_url}>Code ${devicons['Github']}</a>
-            <a class="link-btn" href=${repo.homepage}>Live ${devicons['Chrome']}</a> <br />`;
+            listItem.innerHTML += `
+            <div class=${cardBtns}>
+                <a class="link-btn" href=${repo.html_url}>Code ${devicons['Github']}</a>
+                <a class="link-btn" href=${repo.homepage}>Live ${devicons['Chrome']}</a>
+            </div>`;
         } else {
-            listItem.innerHTML += `<br /> <br />
-            <a class="link-btn" href=${repo.html_url}>View Project ${devicons['Github']}</a><br />`;
+            listItem.innerHTML += `
+            <a class="link-btn" href=${repo.html_url}>View Project ${devicons['Github']}</a>`;
         }
 
         repoList.append(listItem);
