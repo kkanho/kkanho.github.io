@@ -2,8 +2,9 @@
     :root {
         --text: hsl(0, 0%, 8%);
         --accent: hsl(346.8 77.2% 49.8%);
-        --bg: hsl(0 0% 100%);
-        --bg-repo: hsl(240 10% 3.9%);
+        --bg: hsl(0 0% 90%);
+        --bg-repo: hsl(0, 0%, 84%);
+        /* --btn-hover: hsl(346.8 77.2% 49.8%); */
     }
 }
 
@@ -11,8 +12,8 @@
     :root {
         --text: hsl(0, 0%, 90%);
         --accent: hsl(346.8 77.2% 49.8%);
-        --bg: hsl(20 14.3% 4.1%);
-        --bg-repo: hsl(24 9.8% 10%);
+        --bg: hsl(0, 0%, 7%);
+        --bg-repo: hsl(0, 0%, 13%);
     }
 }
 
@@ -149,7 +150,6 @@ input {
     justify-content: center;
     background-color: var(--bg);
     margin-top: 0;
-    padding: 2em;
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
     margin-bottom: 20px;
@@ -162,52 +162,97 @@ input {
     width: 100%; 
     display: grid;
     /* Define Auto Row size */
-    grid-auto-rows: 200px; 
+    grid-auto-rows: max-content;
     /*Define our columns */
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
+    grid-template-columns: repeat(auto-fill, minmax(300px, 2fr)); 
     grid-gap: 1rem;
 }
 
 .repo-list .card {
+    background: var(--bg);
     display: flex;
     flex-direction: column; 
     justify-content: space-around;
-    min-height: 200px;
+    align-items: center;
+    min-height: 250px;
     min-width: 300px;
-    border-radius: 10px;
+    border-radius: 0.8rem;
     gap: 1rem;
-    border: 1px solid var(--accent);
-    padding: 1rem;
+    padding: 1rem 0.5rem;
     text-align: center;
-    background-color: var(--bg-repo);
+    position: relative;
+    overflow: hidden;
 }
 
-.repo-list .card:hover {
-    background-color: var(--bg-repo);
-    box-shadow:
-        0 3px 6px var(--accent),
-        0 3px 6px var(--accent);
+.repo-list .card::before {
+    content: '';
+    position: absolute;
+    background: var(--accent);
+    transform: rotate(0deg);
+    width: 100%;
+    height: 100%;
+    
 }
+
+.repo-list .card:hover::before {
+    width: 200%;
+    height: 30%;
+    animation: rotate 2s linear infinite;
+}
+
+.repo-list .card::after {
+    content: '';
+    position: absolute;
+    border-radius: 0.8rem;
+    background: var(--bg-repo);
+    inset: 2px;
+}
+
+@keyframes rotate {
+    from{
+        transform: rotate(0deg);
+    }
+    to{
+        transform: rotate(360deg);
+    }
+}
+
 
 .repo-list .card .cardTitle {
-    font-size: 1.5rem;
+    font-weight: 600;
+    font-size: 1.6rem;
     margin: 4px 0;
     width: 100%;
     text-align: center;
     color: var(--accent);
+    z-index: 2;
+    border-bottom: solid var(--accent) 2px;
+    padding-bottom: 1rem;
 }
 .repo-list .card .cardDescription{
     font-size: 1.3rem;
+    z-index: 2;
 }
 
 .repo-list .card .cardGroup{
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    z-index: 2;
+}
+
+.repo-list .card .cardGroup a{
+    height: 100%;
+    align-items: center;
+    z-index: 2;
 }
 
 .repo-list .card .cardBtns{
     display: flex;
     justify-content: space-around;
+    width: 80%;
+    z-index: 2;
 }
 
 .link-btn {
@@ -216,12 +261,22 @@ input {
     border-radius: 30px;
     border: 2px solid var(--accent);
     color: var(--text);
+    transition: 0.5s;
+    z-index: 2;
+    position: relative;
+    justify-content: center;
+    align-items: center;
 }
 
 .link-btn:hover {
-    background: var(--accent);
-    border: 2px solid var(--text);
-    transform: scale(1.05);
+    color: var(--bg);
+    border: 2px solid var(--accent);
+    background: var(--text);
+    z-index: 2;
+}
+
+.link-btn:hover i {
+    color: var(--text);
 }
 
 @media (min-width: 700px) {
@@ -229,14 +284,6 @@ input {
         width: 45%;
         text-align: left;
     }
-
-    /* .repo-list {
-        justify-content: space-between;
-    }
-
-    .repo-list .card {
-        width: 48%;
-    } */
 }
 
 @media (max-width: 700px) {
@@ -244,9 +291,3 @@ input {
         margin: 10px;
     }
 }
-
-/* @media (min-width: 1200px) {
-    .repo-list .card {
-        width: 30%;
-    }
-} */

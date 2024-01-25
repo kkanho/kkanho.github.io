@@ -6,6 +6,34 @@ const filterInput = document.querySelector('.filter-repos');
 
 // get information from github profile
 const getProfile = async () => {
+    
+    // // Set the profile with an expiry time of 1 hour
+    // const profile = { value: 'profile', expiry: Date.now() + 60 * 60 * 1000 };
+    // localStorage.setItem('profile', JSON.stringify(profile));
+
+    // // Get the profile and check if it has expired
+    // const cachedData = localStorage.getItem('profile');
+    // if (cachedData) {
+    //     const profile = JSON.parse(cachedData);
+    //     displayProfile(profile);
+    //     if (Date.now() < profile.expiry) {
+    //         // Use the cached profile
+    //         console.log('Using cached profile:', profile.value);
+    //     } else {
+    //         // Remove the expired profile from localStorage
+    //         localStorage.removeItem('profile');
+    //         console.log('Cached profile has expired');
+    //     }
+    // } else {
+    //     // Fetch the profile from the server
+    //     const res = await fetch("https://api.github.com/users/kkanho");
+    //     const profile = await res.json();
+    //     const expiry = Date.now() + 60 * 60 * 1000;
+    //     localStorage.setItem('profile', JSON.stringify({ value: profile, expiry }));
+    //     console.log('Fetched and cached profile:', profile);
+    //     displayProfile(profile);
+    // }
+
     const res = await fetch("https://api.github.com/users/kkanho");
     const profile = await res.json();
     displayProfile(profile);
@@ -17,7 +45,7 @@ const displayProfile = (profile) => {
     const userInfo = document.querySelector('.user-info');
     userInfo.innerHTML = `
         <figure>
-            <img alt="Kan's avatar" src=${profile.avatar_url} />
+            <img alt="Kan's avatar" src=${profile.avatar_url ? profile.avatar_url : "https://st3.depositphotos.com/9998432/13335/v/450/depositphotos_133352064-stock-illustration-default-placeholder-profile-icon.jpg"} />
         </figure>
         <div>
             <h2><a href=${profile.blog}><strong>${profile.name}</strong></a></h2>
@@ -71,27 +99,20 @@ const displayRepos = (repos) => {
         listItem.classList.add('card');
         listItem.innerHTML = `
             <div class=${cardTitle}>${repo.name}</div>
-            <div class=${cardDescription}>${repo.description == null ? '-' : repo.description }</div>`;
-
-        if (repo.stargazers_count > 0 || repo.language || repo.forks_count > 0) {`<div class=${cardGroup}>`}
-
-        if (repo.stargazers_count > 0) {
-            listItem.innerHTML += `<a href="${starsUrl}">
-            <span>⭐ ${repo.stargazers_count}</span></a>`;
-        }
-
-        if (repo.language) {
-            listItem.innerHTML += `<a href="${langUrl}">
-            <span>${devicons[repo.language]}</span></a>`;
-        }
-
-        if (repo.forks_count > 0) {
-            listItem.innerHTML += `<a href="${starsUrl}">
-            <span>${devicons['Git']} ${repo.forks_count}</span></a>`;
-        }
-
-        if (repo.stargazers_count > 0 || repo.language || repo.forks_count > 0) {`</div>`}
-
+            <div class=${cardDescription}>${repo.description == null ? 'Project Description' : repo.description }</div>
+            <div class=${cardGroup}>
+                ${(repo.stargazers_count > 0)?`<a href="${starsUrl}">
+                <span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#FFD438" class="bi bi-star-fill" viewBox="0 0 16 16">
+                        <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                    </svg>
+                ${repo.stargazers_count}</span></a>`:''}
+                ${(repo.language)?`<a href="${langUrl}">
+                <span>${devicons[repo.language]}</span></a>`:''}
+                ${(repo.forks_count > 0)?`<a href="${starsUrl}">
+                <span>${devicons['Git']} ${repo.forks_count}</span></a>`:''}
+            </div>
+        `;
 
         if (repo.homepage && repo.homepage !== '') {
             listItem.innerHTML += `
@@ -99,7 +120,7 @@ const displayRepos = (repos) => {
                 <a class="link-btn" href=${repo.html_url}>Code ${devicons['Github']}</a>
                 <a class="link-btn" href=${repo.homepage}>Live ${devicons['Chrome']}</a>
             </div>`;
-        } else {
+        } else if(repo.html_url) {
             listItem.innerHTML += `
             <a class="link-btn" href=${repo.html_url}>View Project ${devicons['Github']}</a>`;
         }
@@ -111,7 +132,7 @@ const displayRepos = (repos) => {
 // dynamic search
 filterInput.addEventListener('input', (e) => {
     const search = e.target.value;
-    const repos = document.querySelectorAll('.repo');
+    const repos = document.querySelectorAll('.card');
     const searchLowerText = search.toLowerCase();
 
     for (const repo of repos) {
@@ -124,11 +145,12 @@ filterInput.addEventListener('input', (e) => {
     }
 });
 
+
 // for programming language icons
 const devicons = {
     Git: '<i class="devicon-git-plain" style="color: #555"></i>',
-    Github: '<i class="devicon-github-plain" style="color: #1688f0"></i>',
-    Chrome: '<i class="devicon-chrome-plain" style="color: #1688f0"></i>',
+    Github: '<i class="devicon-github-plain" style="color: #e11d48"></i>',
+    Chrome: '<i class="devicon-chrome-plain" style="color: #e11d48"></i>',
     Assembly: '<i class="devicon-labview-plain colored"></i> Assembly',
     'C#': '<i class="devicon-csharp-plain colored"></i> C#',
     'C++': '<i class="devicon-cplusplus-plain colored"></i> C++',
