@@ -1,19 +1,47 @@
-@media (prefers-color-scheme: light) {
-    :root {
-        --text: hsl(0, 0%, 8%);
-        --accent: hsl(346.8 77.2% 49.8%);
-        --bg: hsl(0 0% 90%);
-        --bg-repo: hsl(0, 0%, 84%);
-        /* --btn-hover: hsl(346.8 77.2% 49.8%); */
-    }
+@import url('https://fonts.googleapis.com/css?family=Commissioner:700|Commissioner:400');
+
+*, body {
+  font-family: 'Commissioner';
+  font-weight: 400;
 }
 
+h1, h2, h3, h4, h5 {
+  font-family: 'Commissioner';
+  font-weight: 700;
+}
+
+html {font-size: 100%;} /* 16px */
+
+h1 {font-size: 4.210rem; /* 67.36px */}
+
+h2 {font-size: 3.158rem; /* 50.56px */}
+
+h3 {font-size: 2.369rem; /* 37.92px */}
+
+h4 {font-size: 1.777rem; /* 28.48px */}
+
+h5 {font-size: 1.333rem; /* 21.28px */}
+
+small {font-size: 0.750rem; /* 12px */}
+
+@media (prefers-color-scheme: light) {
+    :root {
+    --text: #11121c;
+    --background: #e9e9f1;
+    --background-50: #efeff5;
+    --primary: #3b405e;
+    --secondary: #bf97a5;
+    --accent: #956a5b;
+    }
+}
 @media (prefers-color-scheme: dark) {
     :root {
-        --text: hsl(0, 0%, 90%);
-        --accent: hsl(346.8 77.2% 49.8%);
-        --bg: hsl(0, 0%, 7%);
-        --bg-repo: hsl(0, 0%, 13%);
+    --text: #e3e4ee;
+    --background: #0f0f17;
+    --background-50: #0a0a0f;
+    --primary: #a2a7c5;
+    --secondary: #69414f;
+    --accent: #a3796a;
     }
 }
 
@@ -27,7 +55,7 @@ body {
     justify-content: center;
     margin: 0;
     font-family: 'Open Sans', sans-serif;
-    background-color: var(--bg);
+    background-color: var(--background);
     color: var(--text);
     font-size: 16px;
 }
@@ -38,7 +66,7 @@ body {
     flex-direction: row;
     flex-wrap: wrap;
     align-items: center;
-    width: 90%;
+    width: 95vw;
 }
 
 .hide {
@@ -46,7 +74,7 @@ body {
 }
 
 h1 {
-    color: var(--accent);
+    color: var(--primary);
     margin-bottom: 4px;
 }
 
@@ -65,16 +93,16 @@ h2 {
 }
 
 img {
-    border: 2px solid var(--accent);
+    border: 2px solid var(--primary);
     box-shadow:
-        0 0px 6px var(--accent),
-        0 0px 6px var(--accent);
+        0 0px 6px var(--primary),
+        0 0px 6px var(--primary);
     max-width: 100%;
     height: auto;
 }
 
 a {
-    color: var(--accent);
+    color: var(--primary);
     text-decoration: none;
 }
 
@@ -96,7 +124,7 @@ ul {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    background-color: var(--bg);
+    background-color: var(--background);
     color: var(--text);
     font-size: 18px;
     padding: 2em;
@@ -106,7 +134,7 @@ ul {
 
 .user-info figure {
     width: 90%;
-    max-width: 200px;
+    max-width: 300px;
 }
 
 .user-info img {
@@ -132,14 +160,14 @@ ul {
 
 .filter-repos,
 input {
-    background: var(--bg);
+    background: var(--background);
     width: 50%;
     border-radius: 20px;
     min-width: 300px;
     margin-top: 1em;
     padding: 1em;
     margin-bottom: 1em;
-    border: 2px solid var(--accent);
+    border: 2px solid var(--primary);
     color: var(--text);
     text-align: center;
 }
@@ -148,7 +176,7 @@ input {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    background-color: var(--bg);
+    background-color: var(--background);
     margin-top: 0;
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
@@ -169,14 +197,14 @@ input {
 }
 
 .repo-list .card {
-    background: var(--bg);
+    background: var(--background);
     display: flex;
     flex-direction: column; 
     justify-content: space-around;
     align-items: center;
     min-height: 250px;
     min-width: 300px;
-    border-radius: 0.8rem;
+    border-radius: 8px;
     gap: 1rem;
     padding: 1rem 0.5rem;
     text-align: center;
@@ -187,7 +215,7 @@ input {
 .repo-list .card::before {
     content: '';
     position: absolute;
-    background: var(--accent);
+    background: var(--primary);
     transform: rotate(0deg);
     width: 100%;
     height: 100%;
@@ -196,15 +224,15 @@ input {
 
 .repo-list .card:hover::before {
     width: 200%;
-    height: 30%;
+    height: 40%;
     animation: rotate 2s linear infinite;
 }
 
 .repo-list .card::after {
     content: '';
     position: absolute;
-    border-radius: 0.8rem;
-    background: var(--bg-repo);
+    border-radius: 8px;
+    background: var(--background-50);
     inset: 2px;
 }
 
@@ -224,9 +252,9 @@ input {
     margin: 4px 0;
     width: 100%;
     text-align: center;
-    color: var(--accent);
+    color: var(--primary);
     z-index: 2;
-    border-bottom: solid var(--accent) 2px;
+    border-bottom: solid var(--primary) 2px;
     padding-bottom: 1rem;
 }
 .repo-list .card .cardDescription{
@@ -245,6 +273,7 @@ input {
 .repo-list .card .cardGroup a{
     height: 100%;
     align-items: center;
+    color: var(--primary);
     z-index: 2;
 }
 
@@ -257,10 +286,10 @@ input {
 
 .link-btn {
     padding: 10px 30px;
-    background: var(--bg);
-    border-radius: 30px;
-    border: 2px solid var(--accent);
-    color: var(--text);
+    background: var(--background);
+    border-radius: 4px;
+    border: 2px solid var(--primary);
+    color: var(--primary);
     transition: 0.5s;
     z-index: 2;
     position: relative;
@@ -269,14 +298,14 @@ input {
 }
 
 .link-btn:hover {
-    color: var(--bg);
-    border: 2px solid var(--accent);
-    background: var(--text);
+    color: var(--background);
+    border: 2px solid var(--primary);
+    background: var(--primary);
     z-index: 2;
 }
 
-.link-btn:hover i {
-    color: var(--text);
+.link-btn i {
+    color: var(--accent);
 }
 
 @media (min-width: 700px) {
@@ -290,4 +319,27 @@ input {
     .user-info div p {
         margin: 10px;
     }
+}
+
+
+#backToTopBtn {
+    display: none; /* Hidden by default */
+    position: fixed; /* Fixed/sticky position */
+    bottom: 20px; /* Place the button at the bottom of the page */
+    right: 30px; /* Place the button 30px from the right */
+    width: 50px;
+    height: 50px;
+    z-index: 99; /* Make sure it does not overlap */
+    border: 2px solid var(--primary); /* Remove borders */
+    outline: none; /* Remove outline */
+    background-color: var(--background); /* Set a background color */
+    color: var(--text); /* Text color */
+    cursor: pointer; /* Add a mouse pointer on hover */
+    
+    border-radius: 4px; /* Rounded corners */
+}
+
+#backToTopBtn:hover {
+    background-color: var(--primary); /* Add a dark-grey background on hover */
+    color: var(--secondary); /* Text color */
 }
