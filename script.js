@@ -99,10 +99,12 @@ const displayProfile = (profile) => {
 if (localStorage.getItem('profile')) {
     const profile = JSON.parse(localStorage.getItem('profile')); // Get the profile from local storage
     if (profile) {
-        displayProfile(profile.value);    //display it
-    } else if (Date.now() >= profile.expiry) { //clear the profile if the profile has expired
-        localStorage.removeItem('profile'); // Remove the expired profile from localStorage
-        getProfile() // get it from fetch
+        if (Date.now() >= profile.expiry) { //clear the profile if the profile has expired
+            localStorage.removeItem('profile'); // Remove the expired profile from localStorage
+            getProfile() // get it from fetch
+        } else {
+            displayProfile(profile.value);    //display it
+        }
     }
 } else { //profile not found in localStorage
     getProfile() // Fetch the profile from the server
@@ -182,10 +184,12 @@ const displayRepos = (repos) => {
 if (localStorage.getItem('repos')) {
     const repos = JSON.parse(localStorage.getItem('repos')); // Get the repos from local storage
     if (repos) {
-        displayRepos(repos.value);    //display it
-    } else if (Date.now() >= repos.expiry) { //clear the repos if the repos has expired
-        localStorage.removeItem('repos'); // Remove the expired repos from localStorage
-        getRepos() // get it from fetch
+        if (Date.now() >= repos.expiry) { //clear the repos if the repos has expired
+            localStorage.removeItem('repos'); // Remove the expired repos from localStorage
+            getRepos() // get it from fetch
+        } else {
+            displayRepos(repos.value);    //display it
+        }
     }
 } else { //repos not found in localStorage
     getRepos() // Fetch the repos from the server
