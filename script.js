@@ -98,9 +98,9 @@ const displayProfile = (profile) => {
 // Get the profile and check if it has expired
 if (localStorage.getItem('profile')) {
     const profile = JSON.parse(localStorage.getItem('profile')); // Get the profile from local storage
-    displayProfile(profile.value);    //display it
-
-    if (Date.now() >= profile.expiry) { //clear the profile if the profile has expired
+    if (profile) {
+        displayProfile(profile.value);    //display it
+    } else if (Date.now() >= profile.expiry) { //clear the profile if the profile has expired
         localStorage.removeItem('profile'); // Remove the expired profile from localStorage
         getProfile() // get it from fetch
     }
@@ -181,9 +181,9 @@ const displayRepos = (repos) => {
 // Get the repos and check if it has expired
 if (localStorage.getItem('repos')) {
     const repos = JSON.parse(localStorage.getItem('repos')); // Get the repos from local storage
-    displayRepos(repos.value);    //display it
-
-    if (Date.now() >= repos.expiry) { //clear the repos if the repos has expired
+    if (repos) {
+        displayRepos(repos.value);    //display it
+    } else if (Date.now() >= repos.expiry) { //clear the repos if the repos has expired
         localStorage.removeItem('repos'); // Remove the expired repos from localStorage
         getRepos() // get it from fetch
     }
