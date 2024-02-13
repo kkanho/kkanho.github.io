@@ -211,18 +211,51 @@ filterInput.addEventListener('input', (e) => {
     }
 });
 
+//light/dark mode
+const lightDarkBtn = document.getElementById("lightDarkBtn");
+const sunIcon = document.getElementById("sunIcon");
+const moonIcon = document.getElementById("moonIcon");
+
+const prefersDarkTheme = window.matchMedia("(prefers-color-scheme: dark)");
+if (prefersDarkTheme.matches) {
+    // Theme set to dark.
+    moonIcon.style.display = 'none'
+    sunIcon.style.display = ''
+    document.documentElement.setAttribute("data-theme", "dark");
+} else {
+    // Theme set to light.
+    sunIcon.style.display = 'none'
+    moonIcon.style.display = ''
+    document.documentElement.setAttribute("data-theme", "light");
+}
+
+
+function toggleLightDark() {
+    if (localStorage.getItem("theme") != 'dark') {
+        localStorage.setItem('theme', 'dark');
+        moonIcon.style.display = 'none'
+        sunIcon.style.display = ''
+        document.documentElement.setAttribute('data-theme', 'dark');
+    } else {
+        localStorage.setItem('theme', 'light');
+        sunIcon.style.display = 'none'
+        moonIcon.style.display = ''
+        document.documentElement.setAttribute('data-theme', 'light');
+    }
+}
+
 
 // Back to Top button:
-let mybutton = document.getElementById("backToTopBtn");
+const toTopButton = document.getElementById("backToTopBtn");
 
 // When the user scrolls down 20px from the top of the document, show the button
 window.onscroll = function () { scrollFunction() };
 
 function scrollFunction() {
     if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-        mybutton.style.display = "block";
+        toTopButton.style.display = "block";
     } else {
-        mybutton.style.display = "none";
+        toTopButton.style.display = "none";
     }
 }
 // When the user clicks on the button, scroll to the top of the document

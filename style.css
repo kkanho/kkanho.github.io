@@ -24,25 +24,25 @@ h5 {font-size: 1.333rem; /* 21.28px */}
 
 small {font-size: 0.750rem; /* 12px */}
 
-@media (prefers-color-scheme: light) {
-    :root {
-    --text: #11121c;
-    --background: #e9e9f1;
-    --background-50: #efeff5;
-    --primary: #3b405e;
-    --secondary: #bf97a5;
-    --accent: #956a5b;
-    }
+
+:root {
+--text: #11121c;
+--background: #e9e9f1;
+--background-50: #efeff5;
+--primary: #3b405e;
+--secondary: #bf97a5;
+--accent: #956a5b;
 }
-@media (prefers-color-scheme: dark) {
-    :root {
+
+[data-theme="dark"] {
+
     --text: #e3e4ee;
     --background: #0f0f17;
     --background-50: #0a0a0f;
     --primary: #a2a7c5;
     --secondary: #69414f;
     --accent: #a3796a;
-    }
+    
 }
 
 * {
@@ -56,6 +56,7 @@ body {
     margin: 0;
     font-family: 'Open Sans', sans-serif;
     background-color: var(--background);
+        transition: background-color 1.5s;
     color: var(--text);
     font-size: 16px;
 }
@@ -125,11 +126,10 @@ ul {
     flex-wrap: wrap;
     justify-content: center;
     background-color: var(--background);
+        transition: background-color 1.5s;
     color: var(--text);
     font-size: 18px;
     padding: 2em;
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
 }
 
 .user-info figure {
@@ -160,7 +160,8 @@ ul {
 
 .filter-repos,
 input {
-    background: var(--background);
+    background-color: var(--background);
+        transition: background-color 1.5s;
     width: 50%;
     border-radius: 20px;
     min-width: 300px;
@@ -177,6 +178,7 @@ input {
     flex-wrap: wrap;
     justify-content: center;
     background-color: var(--background);
+    transition: background-color 1.5s;
     margin-top: 0;
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
@@ -197,7 +199,8 @@ input {
 }
 
 .repo-list .card {
-    background: var(--background);
+    background-color: var(--background);
+        transition: background-color 1.5s;
     display: flex;
     flex-direction: column; 
     justify-content: space-around;
@@ -206,7 +209,7 @@ input {
     min-width: 300px;
     border-radius: 8px;
     gap: 1rem;
-    padding: 1rem 0.5rem;
+    padding: 20px 4px;
     text-align: center;
     position: relative;
     overflow: hidden;
@@ -215,7 +218,8 @@ input {
 .repo-list .card::before {
     content: '';
     position: absolute;
-    background: var(--primary);
+    background-color: var(--primary);
+        transition: background-color 1.5s;
     transform: rotate(0deg);
     width: 100%;
     height: 100%;
@@ -232,7 +236,8 @@ input {
     content: '';
     position: absolute;
     border-radius: 8px;
-    background: var(--background-50);
+    background-color: var(--background-50);
+        transition: background-color 1.5s;
     inset: 2px;
 }
 
@@ -286,15 +291,13 @@ input {
 
 .link-btn {
     padding: 10px 30px;
-    background: var(--background);
+    background-color: var(--background);
+    transition: background-color 1.5s;
     border-radius: 4px;
     border: 2px solid var(--primary);
     color: var(--primary);
-    transition: 0.5s;
     z-index: 2;
     position: relative;
-    justify-content: center;
-    align-items: center;
 }
 
 .link-btn:hover {
@@ -321,6 +324,28 @@ input {
     }
 }
 
+#lightDarkBtn {
+    position: fixed; /* Fixed/sticky position */
+    top: 20px; /* Place the button at the bottom of the page */
+    right: 30px; /* Place the button 30px from the right */
+    width: 50px;
+    height: 50px;
+    z-index: 99; /* Make sure it does not overlap */
+    border: 2px solid var(--primary); /* Remove borders */
+    outline: none; /* Remove outline */
+    background-color: var(--background);
+    transition: background-color 1.5s; /* Set a background color */
+    color: var(--text); /* Text color */
+    cursor: pointer; /* Add a mouse pointer on hover */
+    border-radius: 4px; /* Rounded corners */
+}
+
+#lightDarkBtn:hover {
+    background-color: var(--primary); /* Add a dark-grey background on hover */
+    color: var(--secondary); /* Text color */
+}
+
+
 
 #backToTopBtn {
     display: none; /* Hidden by default */
@@ -332,7 +357,8 @@ input {
     z-index: 99; /* Make sure it does not overlap */
     border: 2px solid var(--primary); /* Remove borders */
     outline: none; /* Remove outline */
-    background-color: var(--background); /* Set a background color */
+    background-color: var(--background);
+    transition: background-color 1.5s; /* Set a background color */
     color: var(--text); /* Text color */
     cursor: pointer; /* Add a mouse pointer on hover */
     
