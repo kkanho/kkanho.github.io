@@ -26,16 +26,17 @@ small {font-size: 0.750rem; /* 12px */}
 
 
 :root {
---text: #11121c;
---background: #e9e9f1;
---background-50: #efeff5;
---primary: #3b405e;
---secondary: #bf97a5;
---accent: #956a5b;
+    color-scheme: light;
+    --text: #11121c;
+    --background: #e9e9f1;
+    --background-50: #efeff5;
+    --primary: #3b405e;
+    --secondary: #bf97a5;
+    --accent: #956a5b;
 }
 
 [data-theme="dark"] {
-
+    color-scheme: dark;
     --text: #e3e4ee;
     --background: #0f0f17;
     --background-50: #0a0a0f;
