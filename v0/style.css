@@ -1,13 +1,13 @@
 @import url('https://fonts.googleapis.com/css?family=Commissioner:700|Commissioner:400');
 
 *, body {
-  font-family: 'Commissioner';
-  font-weight: 400;
+    font-family: 'Commissioner';
+    font-weight: 400;
 }
 
 h1, h2, h3, h4, h5 {
-  font-family: 'Commissioner';
-  font-weight: 700;
+    font-family: 'Commissioner';
+    font-weight: 700;
 }
 
 html {font-size: 100%;} /* 16px */
@@ -30,7 +30,7 @@ small {font-size: 0.750rem; /* 12px */}
     --text: #11121c;
     --background: #e9e9f1;
     --background-50: #efeff5;
-    --primary: #3b405e;
+    --primary: #0f0f17;
     --secondary: #bf97a5;
     --accent: #956a5b;
 }
@@ -40,7 +40,7 @@ small {font-size: 0.750rem; /* 12px */}
     --text: #e3e4ee;
     --background: #0f0f17;
     --background-50: #0a0a0f;
-    --primary: #a2a7c5;
+    --primary: #e9e9f1;
     --secondary: #69414f;
     --accent: #a3796a;
     
@@ -343,7 +343,7 @@ input {
 
 #lightDarkBtn:hover {
     background-color: var(--primary); /* Add a dark-grey background on hover */
-    color: var(--secondary); /* Text color */
+    color: var(--primary); /* Text color */
 }
 
 
@@ -368,5 +368,5 @@ input {
 
 #backToTopBtn:hover {
     background-color: var(--primary); /* Add a dark-grey background on hover */
-    color: var(--secondary); /* Text color */
+    color: var(--primary); /* Text color */
 }

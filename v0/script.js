@@ -125,7 +125,6 @@ const getRepos = async () => {
     localStorage.setItem('repos', JSON.stringify({ value: repos, expiry }));
     displayRepos(repos);
 };
-// getRepos();
 
 // display list of all public repos
 const displayRepos = (repos) => {
